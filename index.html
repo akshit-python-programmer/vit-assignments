@@ -116,10 +116,14 @@
     <h2 id="mTitle">Compressing…</h2>
     <div class="bar" id="mBarWrap"><div id="mBar"></div></div>
     <p id="mStatus" class="status"></p>
-    <ol id="mLog" class="log"></ol>
+    <a id="mAd" class="ad" target="_blank" rel="sponsored noopener" hidden>
+      <img alt="">
+      <span class="ad-label">Ad</span>
+    </a>
+    <details class="log-wrap"><summary>Compression details</summary><ol id="mLog" class="log"></ol></details>
     <div class="actions">
       <button class="btn" id="mClose">Close</button>
-      <button class="btn primary" id="mAgain" hidden>Download again</button>
+      <button class="btn primary" id="mAgain" hidden>Download PDF</button>
     </div>
   </div>
 </div>
@@ -129,6 +133,7 @@
 <input type="file" id="pdfInput" accept="application/pdf,.pdf" hidden>
 <input type="file" id="imgInput" accept="image/*" multiple hidden>
 
+<script src="ads.js"></script>
 <script src="vendor/pdf-lib.min.js"></script>
 <script type="module" src="app.js"></script>
 </body>

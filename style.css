@@ -303,3 +303,39 @@ body.text-mode .layer { cursor: text; }
   #pages { padding: 14px 10px 150px; gap: 14px; }
   .selbar { bottom: 96px; }
 }
+
+/* ---------- ad slot ---------- */
+.ad {
+  position: relative; display: block; margin: 14px 0 4px; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line); background: var(--soft); text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.ad[href]:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(16,24,40,.14); }
+.ad img { display: block; width: 100%; height: auto; max-height: 220px; object-fit: cover; }
+.ad-label {
+  position: absolute; top: 8px; right: 8px; font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff; background: rgba(16,20,28,.55); padding: 2px 7px; border-radius: 99px;
+}
+.log-wrap { margin-top: 10px; }
+.log-wrap summary { cursor: pointer; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.btn.primary:disabled { opacity: .65; }
+
+/* ---------- polish ---------- */
+body { -webkit-font-smoothing: antialiased; }
+.topbar { box-shadow: 0 1px 0 var(--line), 0 2px 10px rgba(16,24,40,.04); border-bottom: 0; }
+.brand span { background: linear-gradient(90deg, #1d3fd6, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#viewer { background: radial-gradient(1200px 600px at 50% -200px, #f4f6fb 0%, var(--bg) 70%); }
+.btn { box-shadow: 0 1px 2px rgba(16,24,40,.05); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn.primary { background: linear-gradient(180deg, #3a66ff, #2550f0); box-shadow: 0 1px 2px rgba(16,24,40,.12), inset 0 1px 0 rgba(255,255,255,.18); }
+.page { border-radius: 2px; transition: box-shadow .15s; }
+.page-block:hover .page { box-shadow: 0 2px 4px rgba(16,24,40,.10), 0 12px 28px rgba(16,24,40,.10); }
+.thumb { transition: transform .12s, border-color .12s, box-shadow .12s; }
+.thumb:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(16,24,40,.12); }
+.dropzone { box-shadow: 0 10px 40px rgba(16,24,40,.06); }
+.modal { backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); animation: fade .15s ease-out; }
+.card { animation: pop .18s ease-out; }
+@keyframes fade { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+.selbar { animation: pop .14s ease-out; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
