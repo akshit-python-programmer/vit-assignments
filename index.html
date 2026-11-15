@@ -40,6 +40,7 @@
     </div>
   </div>
 
+  <a class="site-link" href="https://akshitkumarlall.com" target="_blank" rel="noopener">Akshitkumarlall.com</a>
   <div class="export">
     <label class="limit" title="The downloaded PDF will be compressed to land just under this size">
       <span>Max</span>
@@ -83,6 +84,7 @@
           <li><b>Download</b> — it’s compressed to land just under your size limit, keeping as much quality as possible.</li>
         </ol>
         <p class="private">Everything runs in your browser. Your files never leave your device.</p>
+        <p class="private">Made by <a href="https://akshitkumarlall.com" target="_blank" rel="noopener">Akshitkumarlall.com</a></p>
       </div>
     </div>
     <div id="pages"></div>
@@ -116,14 +118,10 @@
     <h2 id="mTitle">Compressing…</h2>
     <div class="bar" id="mBarWrap"><div id="mBar"></div></div>
     <p id="mStatus" class="status"></p>
-    <a id="mAd" class="ad" target="_blank" rel="sponsored noopener" hidden>
-      <img alt="">
-      <span class="ad-label">Ad</span>
-    </a>
     <details class="log-wrap"><summary>Compression details</summary><ol id="mLog" class="log"></ol></details>
     <div class="actions">
       <button class="btn" id="mClose">Close</button>
-      <button class="btn primary" id="mAgain" hidden>Download PDF</button>
+      <button class="btn primary" id="mAgain" hidden>Download again</button>
     </div>
   </div>
 </div>
@@ -133,7 +131,6 @@
 <input type="file" id="pdfInput" accept="application/pdf,.pdf" hidden>
 <input type="file" id="imgInput" accept="image/*" multiple hidden>
 
-<script src="ads.js"></script>
 <script src="vendor/pdf-lib.min.js"></script>
 <script type="module" src="app.js"></script>
 </body>

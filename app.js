@@ -1144,39 +1144,6 @@ async function compressToFit(cap, ui) {
 
 /* ---------- Download flow ---------- */
 
-/* ---------- static ads in the download dialog (configured in ads.js) ---------- */
-let adShownAt = 0;
-let countdownTimer = null;
-function showAd() {
-  const ads = (Array.isArray(window.APE_ADS) ? window.APE_ADS : []).filter(a => a && a.image);
-  const el = $('#mAd');
-  if (!ads.length) { el.hidden = true; adShownAt = 0; return; }
-  const ad = ads[Math.floor(Math.random() * ads.length)];
-  const img = el.querySelector('img');
-  img.src = ad.image;
-  img.alt = ad.alt || 'Advertisement';
-  if (ad.link) el.href = ad.link; else el.removeAttribute('href');
-  el.hidden = false;
-  adShownAt = Date.now();
-}
-function unlockDownload() {
-  clearInterval(countdownTimer);
-  const btn = els.mAgain;
-  btn.hidden = false;
-  const wait = adShownAt ? Math.max(0, Number(window.APE_AD_SECONDS) || 0) * 1000 - (Date.now() - adShownAt) : 0;
-  const ready = () => { btn.disabled = false; btn.textContent = 'Download PDF'; };
-  if (wait <= 0) { ready(); return; }
-  const end = Date.now() + wait;
-  btn.disabled = true;
-  const tickFn = () => {
-    const s = Math.ceil((end - Date.now()) / 1000);
-    if (s <= 0) { clearInterval(countdownTimer); ready(); }
-    else btn.textContent = `Download in ${s}s…`;
-  };
-  tickFn();
-  countdownTimer = setInterval(tickFn, 250);
-}
-
 function makeUI() {
   els.mLog.innerHTML = '';
   els.mStatus.textContent = '';
@@ -1185,7 +1152,6 @@ function makeUI() {
   els.mAgain.hidden = true;
   els.mClose.textContent = 'Close';
   els.modal.hidden = false;
-  showAd();
   return {
     status: t => { els.mStatus.textContent = t; },
     log: (t, cls) => {
@@ -1228,7 +1194,7 @@ async function exportPdf() {
     }
     state.lastExport = res.bytes;
     els.mBarWrap.className = 'bar done';
-    els.mTitle.textContent = 'Your PDF is ready';
+    els.mTitle.textContent = 'Done — downloading';
     let note;
     if (res.mode === 'vector' && res.L == null) note = 'No images to compress — your PDF already fits.';
     else if (res.top) note = res.mode === 'vector'
@@ -1240,8 +1206,9 @@ async function exportPdf() {
     const big = h('span', 'big'); big.textContent = fmtMB(res.bytes.length);
     const small = h('span'); small.textContent = note;
     els.mStatus.append(big, small);
+    els.mAgain.hidden = false;
     els.mClose.textContent = 'Back to editing';
-    unlockDownload();
+    triggerDownload(res.bytes);
   } catch (err) {
     console.error(err);
     els.mBarWrap.className = 'bar fail';
